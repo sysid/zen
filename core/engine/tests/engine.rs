@@ -138,3 +138,42 @@ async fn engine_with_trace() {
     let trace = table_opt.trace.unwrap();
     assert_eq!(trace.len(), 3); // trace for each node
 }
+
+#[tokio::test]
+async fn engine_with_trace_tw() {
+    let engine = DecisionEngine::new(create_fs_loader());
+
+    let table_r = engine.evaluate("credit-analysis.tw.json", &json!({
+      "company": {
+        "turnover": 1000000,
+        "type": "INC",
+        "country": "US"
+      }
+    })).await;
+    let table_opt_r = engine
+        .evaluate_with_opts(
+            "credit-analysis.tw.json",
+            &json!({
+              "company": {
+                "turnover": 1000000,
+                "type": "INC",
+                "country": "US"
+              }
+            }),
+            EvaluationOptions {
+                trace: Some(true),
+                max_depth: None,
+            },
+        )
+        .await;
+
+    let table = table_r.unwrap();
+    let table_opt = table_opt_r.unwrap();
+
+    assert!(table.trace.is_none());
+    assert!(table_opt.trace.is_some());
+
+    // let trace = table_opt.trace.unwrap();
+    println!("{:#?}", table_opt.trace);
+    // assert_eq!(trace.len(), 3); // trace for each node
+}

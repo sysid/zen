@@ -17,7 +17,7 @@
         "y": 240
       },
       "name": "functionNode 1",
-      "content": "/**\n* @param {import('gorules').Input} input\n* @param {{\n*  moment: import('dayjs')\n*  env: Record<string, any>\n* }} helpers\n*/\nconst handler = (input, { moment, env }) => {\n  return {\n    output: input.input * 2,\n  };\n}"
+      "content": "/**\n* @param {import('gorules').Input} input\n* @param {{\n*  moment: import('dayjs')\n*  env: Record<string, any>\n* }} helpers\n*/\nconst handler = (input, { moment, env }) => {\n  console.log(input)\n  return {\n    output: input.input * 2,\n  };\n}"
     },
     {
       "id": "db8797b1-bcc1-4fbf-a5d8-e7d43a181d5e",

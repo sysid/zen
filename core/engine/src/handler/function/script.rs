@@ -53,9 +53,11 @@ impl Script {
         let tc_scope = &mut v8::TryCatch::new(scope);
 
         let src = v8::String::new(tc_scope, source).context("Failed to compile source code")?;
+        println!("-M- src code: {}", src.to_rust_string_lossy(tc_scope));
 
         let js_src = v8::String::new(tc_scope, js_code_source.as_str())
             .context("Failed to compile source code")?;
+        println!("-M- js_src code: {}", js_src.to_rust_string_lossy(tc_scope));
 
         if let Some(timeout) = self.timeout {
             thread::spawn(move || {
@@ -73,6 +75,7 @@ impl Script {
             let exception = tc_scope.exception().unwrap();
             return Err(anyhow!(exception.to_rust_string_lossy(tc_scope)));
         }
+        println!("-M- src_script run ok");
 
         let Some(js_script) = v8::Script::compile(tc_scope, js_src, None) else {
             let exception = tc_scope.exception().context("Failed to load script")?;
@@ -87,6 +90,7 @@ impl Script {
             let exception = tc_scope.exception().context("Failed to run loaded script")?;
             return Err(anyhow!(exception.to_rust_string_lossy(tc_scope)));
         };
+        println!("-M- js_script run ok");
 
         serde_v8::from_v8(tc_scope, result).context("Failed to parse function result")
     }

@@ -323,7 +323,7 @@ mod tests {
             &serde_json::from_str(include_str!("../../../../test-data/function.json")).unwrap();
         let tree = DecisionGraph::new(DecisionGraphConfig {
             max_depth: 5,
-            trace: false,
+            trace: true,
             iteration: 0,
             content,
             loader: Arc::new(MemoryLoader::default()),
@@ -332,5 +332,6 @@ mod tests {
         let result = tree.evaluate(&json!({ "input": 15 })).await.unwrap();
 
         assert_eq!(result.result, json!({ "output": 30 }));
+        println!("{:#?}", result.trace);
     }
 }
