@@ -1,4 +1,6 @@
 # ZEN TW
+test-data holds FBS specific stuff
+
 ## Python
 create virtualenv in GITROOT
 cd /Users/Q187392/dev/s/forked/zen/bindings/python

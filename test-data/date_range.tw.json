@@ -1,0 +1,92 @@
+{
+  "contentType": "application/vnd.gorules.decision",
+  "edges": [
+    {
+      "id": "4439f264-bebf-48f2-9919-fe17b92cda6e",
+      "sourceId": "a505bca7-0a2f-4b87-aba0-59eccff2c755",
+      "type": "edge",
+      "targetId": "07c85517-c62e-4079-b026-c54f065ced7b"
+    },
+    {
+      "id": "5aeff27d-d54f-4846-bd3a-e7238fbbe67c",
+      "sourceId": "07c85517-c62e-4079-b026-c54f065ced7b",
+      "type": "edge",
+      "targetId": "80ee3207-7113-470b-95fc-80e24630a43a"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "a505bca7-0a2f-4b87-aba0-59eccff2c755",
+      "type": "inputNode",
+      "position": {
+        "x": 100,
+        "y": 230
+      },
+      "name": "Request"
+    },
+    {
+      "id": "07c85517-c62e-4079-b026-c54f065ced7b",
+      "type": "decisionTableNode",
+      "position": {
+        "x": 480,
+        "y": 230
+      },
+      "name": "decisionTableNode 1",
+      "content": {
+        "hitPolicy": "first",
+        "inputs": [
+          {
+            "field": "date(input)",
+            "id": "dRkZUxwYhx",
+            "name": "Input",
+            "type": "expression"
+          }
+        ],
+        "outputs": [
+          {
+            "field": "dateBucket",
+            "id": "bPJ8vEFq99",
+            "name": "Date bucket",
+            "type": "expression"
+          }
+        ],
+        "rules": [
+          {
+            "_id": "1vfV2wO76v",
+            "dRkZUxwYhx": ">= date(\"2023-01-01\") and < date(\"2023-04-01\")",
+            "bPJ8vEFq99": "\"Q1-2023\""
+          },
+          {
+            "_id": "A-CtgQwcyS",
+            "dRkZUxwYhx": ">= date(\"2023-04-01\") and < date(\"2023-07-01\")",
+            "bPJ8vEFq99": "\"Q2-2023\""
+          },
+          {
+            "_id": "ZPsGmoPnUx",
+            "dRkZUxwYhx": ">= date(\"2023-07-01\") and < date(\"2023-10-01\")",
+            "bPJ8vEFq99": "\"Q3-2023\""
+          },
+          {
+            "_id": "3tx7jFj73r",
+            "dRkZUxwYhx": ">= date(\"2023-10-01\") and < date(\"2024-01-01\")",
+            "bPJ8vEFq99": "\"Q4-2023\""
+          },
+          {
+            "_id": "34TqwB0L1g",
+            "dRkZUxwYhx": "",
+            "bPJ8vEFq99": "\"unknown\""
+          }
+        ]
+      }
+    },
+    {
+      "id": "80ee3207-7113-470b-95fc-80e24630a43a",
+      "type": "outputNode",
+      "position": {
+        "x": 870,
+        "y": 230
+      },
+      "name": "Response"
+    }
+  ]
+}

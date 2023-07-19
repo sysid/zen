@@ -20,6 +20,26 @@ class ZenEngine:
         )
         pprint(r1)
 
+    @staticmethod
+    def handcraft_json():
+        engine = zen.ZenEngine({"loader": loader})
+        r1 = engine.evaluate(
+            "fees.tw.json",
+            {
+                "cart": {
+                    "total": 800
+                },
+                "customer": {
+                    "country": "US",
+                    "tier": "gold"
+                }
+            },
+            {"trace": True}
+        )
+        pprint(r1)
+        assert r1["result"]["fees"]["flat"] == 25
+
 
 if __name__ == '__main__':
-    ZenEngine().test_decision_using_loader()
+    # ZenEngine().test_decision_using_loader()
+    ZenEngine().handcraft_json()

@@ -1,0 +1,180 @@
+{
+  "contentType": "application/vnd.gorules.decision",
+  "edges": [
+    {
+      "id": "input-edge",
+      "sourceId": "input-node",
+      "type": "edge",
+      "targetId": "table-node"
+    },
+    {
+      "id": "output-edge",
+      "sourceId": "table-node",
+      "type": "edge",
+      "targetId": "output-node"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "input-node",
+      "type": "inputNode",
+      "position": {
+        "x": 350,
+        "y": 600
+      },
+      "name": "Request"
+    },
+    {
+      "id": "table-node",
+      "type": "decisionTableNode",
+      "position": {
+        "x": 570,
+        "y": 600
+      },
+      "name": "permission_to_ask",
+      "content": {
+        "hitPolicy": "first",
+        "inputs": [
+          {
+            "field": "fb_for_session_exists",
+            "id": "fb_for_session_exists",
+            "name": "fb_for_session_exists",
+            "type": "expression"
+          },
+          {
+            "id": "fb_for_poi_within_1h",
+            "type": "expression",
+            "field": "fb_for_poi_within_1h",
+            "name": "fb_for_poi_within_1h"
+          },
+          {
+            "id": "context_type",
+            "type": "expression",
+            "field": "context_type",
+            "name": "context_type"
+          },
+          {
+            "id": "poi_country_code",
+            "type": "expression",
+            "field": "poi_country_code",
+            "name": "poi_country_code"
+          },
+          {
+            "id": "car_origin_country_code",
+            "type": "expression",
+            "field": "car_origin_country_code",
+            "name": "car_origin_country_code"
+          },
+          {
+            "id": "vin",
+            "type": "expression",
+            "field": "vin",
+            "name": "vin"
+          }
+        ],
+        "outputs": [
+          {
+            "field": "permission_to_ask",
+            "id": "output-",
+            "name": "Output",
+            "type": "expression"
+          },
+          {
+            "id": "reason",
+            "type": "expression",
+            "field": "reason",
+            "name": "Reason"
+          }
+        ],
+        "rules": [
+          {
+            "_id": "001",
+            "fb_for_session_exists": "true",
+            "fb_for_poi_within_1h": "",
+            "context_type": "",
+            "poi_country_code": "",
+            "car_origin_country_code": "",
+            "vin": "",
+            "output-": "false",
+            "reason": "\"001: Feedback for this charging-session-id already exists.\""
+          },
+          {
+            "_id": "002",
+            "fb_for_session_exists": "",
+            "fb_for_poi_within_1h": "> 0",
+            "context_type": "",
+            "poi_country_code": "",
+            "car_origin_country_code": "",
+            "vin": "",
+            "output-": "false",
+            "reason": "\"002: Feedback for this charging station was already provided within the last 1 hour.\""
+          },
+          {
+            "_id": "003",
+            "fb_for_session_exists": "",
+            "fb_for_poi_within_1h": "",
+            "context_type": "",
+            "poi_country_code": "\"xxx\"",
+            "car_origin_country_code": "",
+            "vin": "",
+            "output-": "false",
+            "reason": "\"xxx: Comes from XXX\""
+          },
+          {
+            "_id": "004",
+            "fb_for_session_exists": "",
+            "fb_for_poi_within_1h": "",
+            "context_type": "",
+            "poi_country_code": "",
+            "car_origin_country_code": "",
+            "vin": "startsWith($, \"wba\")",
+            "output-": "true",
+            "reason": ""
+          },
+          {
+            "_id": "005",
+            "fb_for_session_exists": "",
+            "fb_for_poi_within_1h": "",
+            "context_type": "",
+            "poi_country_code": "",
+            "car_origin_country_code": "",
+            "vin": "startsWith($, \"wba\")",
+            "output-": "true",
+            "reason": ""
+          },
+          {
+            "_id": "006",
+            "fb_for_session_exists": "",
+            "fb_for_poi_within_1h": "",
+            "context_type": "",
+            "poi_country_code": "",
+            "car_origin_country_code": "",
+            "vin": "startsWith($, \"5ux\")",
+            "output-": "true",
+            "reason": ""
+          },
+          {
+            "_id": "007",
+            "fb_for_session_exists": "",
+            "fb_for_poi_within_1h": "",
+            "context_type": "",
+            "poi_country_code": "",
+            "car_origin_country_code": "",
+            "vin": "",
+            "output-": "false",
+            "reason": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "output-node",
+      "type": "outputNode",
+      "position": {
+        "x": 780,
+        "y": 600
+      },
+      "name": "Response"
+    }
+  ]
+}
